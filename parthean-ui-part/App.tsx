@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState} from 'react';
-import { Dimensions, StyleSheet, Switch, Text, Pressable, SafeAreaView } from 'react-native';
+import { Dimensions, StyleSheet, Text, Pressable, SafeAreaView, View } from 'react-native';
 import CustomCarousel from './assets/components/carousel';
 import CustomSwitch from './assets/components/switch';
 
@@ -10,12 +10,21 @@ export default function App() {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="auto" />
-      <Pressable style={styles.x_button}><Text style={styles.p}>X</Text></Pressable>
+      <Pressable style={styles.x_button} onPress={() => alert('pressed exit btn!')}><Text style={styles.p}>X</Text></Pressable>
+
       <Text style={styles.h1}>Financial coaching and education in your pocket</Text>
       <Text style={styles.p}>Upgrade to get the most out of Parthean</Text>
-      <CustomSwitch isMonthly={isMonthly} setIsMonthly={setIsMonthly}/>
+
+      {/* <View style={{flex: 0, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', width: Dimensions.get('window').width}}> */}
+       
+        <CustomSwitch isMonthly={isMonthly} setIsMonthly={setIsMonthly}/>
+        {/* <View style={{position: 'absolute', right: 30, paddingLeft: 10, paddingRight: 10, backgroundColor: '#3D4043', borderRadius: 20}}>
+          <Text style={[styles.p, {fontSize: 10, color: '#1FCB64'}]}>Best Value</Text>
+        </View> */}
+
+
       <CustomCarousel isMonthly={isMonthly}/>
-      <Pressable style={styles.button}>
+      <Pressable style={styles.button} onPress={() => alert('pressed continue btn!')}>
         <Text style={[styles.p, {color: 'black'}]}>Continue</Text>
       </Pressable>
 

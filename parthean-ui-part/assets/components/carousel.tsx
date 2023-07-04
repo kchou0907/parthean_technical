@@ -61,25 +61,26 @@ const tiers: tierFeatures[] = [
       },
 ];
 
-export const SLIDER_WIDTH = Dimensions.get('window').width + 30;
+export const SLIDER_WIDTH = Dimensions.get('window').width;
 export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.8);
 
 export default function CustomCarousel({isMonthly}: {isMonthly: boolean}) {
-        let [currIndex, setIndex] = useState(0);
+        const [currIndex, setIndex] = useState(0);
 
         const renderItem = ({item}: {item: tierFeatures}) => {
-            let perks = item.perks.map((currPerk, i) => renderPerk(currPerk, i));
-            let price = `$${isMonthly ? item.price_monthly : item.price_yearly_month}/month`;
-            let annualPrice = <Text style={styles.price_annually}>{`${!isMonthly ? "(" + item.price_yearly+ "/year)" : ""}`}</Text>;
+            const perks = item.perks.map((currPerk, i) => renderPerk(currPerk, i));
+            const price_monthly = `$${item.price_monthly}/month`;
+            const price_annually_monthly = `$${item.price_yearly_month}/month`;
+            const annualPrice = <Text style={styles.price_annually}>{`(${item.price_yearly}/year)`}</Text>;
             return (
                 <View style={{
                     backgroundColor:'#1D1D1D',
-                    borderRadius: 5,
+                    borderRadius: 10,
                     height: Dimensions.get('window').height,
                     padding: 20,
                 }}>
                     <Text style={styles.tier_name}>{item.title}</Text>
-                    <Text style={styles.price_monthly}>{price} {annualPrice}</Text>
+                    <Text style={styles.price_monthly}>{isMonthly ? price_monthly : price_annually_monthly} {!isMonthly && annualPrice}</Text>
                     <View>
                         {perks}
                     </View>
@@ -95,7 +96,7 @@ export default function CustomCarousel({isMonthly}: {isMonthly: boolean}) {
                 vertical={false}
                 sliderWidth={SLIDER_WIDTH}
                 itemWidth={ITEM_WIDTH}
-                renderItem={(item) => renderItem(item)}
+                renderItem={renderItem}
                 onSnapToItem={(index) => setIndex(index)}
                 />
                 { pagination(tiers, currIndex) }
@@ -120,14 +121,8 @@ function pagination(entries: tierFeatures[], index: number) {
         <Pagination
             dotsLength={entries.length}
             activeDotIndex={index}
-            containerStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.75)' }}
-            dotStyle={{
-                width: 10,
-                height: 10,
-                borderRadius: 5,
-                marginHorizontal: 8,
-                backgroundColor: 'rgba(255, 255, 255, 0.92)'
-            }}
+            containerStyle={styles.dots_container}
+            dotStyle={styles.dots}
             inactiveDotOpacity={0.4}
             inactiveDotScale={0.6}
         />
@@ -136,11 +131,6 @@ function pagination(entries: tierFeatures[], index: number) {
 
 
 const styles = StyleSheet.create({
-    perk_container: {
-      marginTop: 10,
-      flexDirection: 'row',
-      alignItems: 'center',
-    },
     tier_name: {
         color: '#1FCB64',
         fontSize: 18
@@ -153,6 +143,12 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: 'rgba(255, 255, 255, 0.4)',
         opacity: 0
+    },
+    perk_container: {
+        marginTop: 10,
+        flexDirection: 'row',
+        alignItems: 'center',
+        borderRadius: 20
     },
     perk_name: {
         fontSize: 18,
@@ -168,5 +164,15 @@ const styles = StyleSheet.create({
         width: 30,
         height: 30,
         resizeMode: 'contain'
+    },
+    dots: {
+        width: 10,
+        height: 10,
+        borderRadius: 5,
+        marginHorizontal: 8,
+        backgroundColor: 'rgba(255, 255, 255, 0.92)'
+    },
+    dots_container: { 
+        backgroundColor: 'rgba(0, 0, 0, 0.75)' 
     }
   });
