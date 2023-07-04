@@ -1,16 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState} from 'react';
-import { StyleSheet, Switch, Text, View, SafeAreaView } from 'react-native';
+import { Dimensions, StyleSheet, Switch, Text, Pressable, SafeAreaView } from 'react-native';
 import CustomCarousel from './assets/components/carousel';
-import { ItemProps } from './assets/components/carousel';
 
 export default function App() {
   const [isMonthly, setIsMonthly] = useState(true);
   const toggleSwitch = () => setIsMonthly(prevState => !prevState);
   const green: string = '#1FCB64';
   const font: string = 'Sohne';
-
-
 
   return (
     <SafeAreaView style={styles.container}>
@@ -24,7 +21,10 @@ export default function App() {
         onValueChange={toggleSwitch}
         value={isMonthly}
       />
-     {  <CustomCarousel/>}
+      <CustomCarousel/>
+      <Pressable style={styles.button}>
+        <Text style={styles.p}>Continue</Text>
+      </Pressable>
 
     </SafeAreaView>
   );
@@ -33,14 +33,36 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    paddingTop: Dimensions.get('window').height * 0.1,
+    paddingBottom: Dimensions.get('window').height * 0.1,
+    backgroundColor: '#000000',
     alignItems: 'center',
     justifyContent: 'center',
   },
   h1: {
-    textAlign: 'center'
+    textAlign: 'center',
+    color:'#FFFFFF',
+    maxWidth: Dimensions.get('window').width * 0.8,
+
+    fontSize: 24,
+    lineHeight: 30,  
   },
   p: {
-    textAlign: 'center'
+    textAlign: 'center',
+    color: '#FFFFFF',
+    maxWidth: Dimensions.get('window').width * 0.8,
+
+    opacity: 0.75,
+    fontSize: 16,
+    lineHeight: 20
   },
+  button: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 12,
+    paddingHorizontal: Dimensions.get('window').width * 0.35,
+    borderRadius: 4,
+    elevation: 3,
+    backgroundColor: '#1FCB64',
+  }
 });
