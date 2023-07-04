@@ -1,16 +1,50 @@
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 import React, { useState } from 'react';
 import { SafeAreaView, View, Dimensions, Text } from 'react-native';
+import { Double } from 'react-native/Libraries/Types/CodegenTypes';
 
-const tiers: {title: string, text: string}[] = [
+const tiers: {title: string, price_monthly: Double, price_yearly_month: Double, price_yearly: Double, perks:{name: String, description: String, photo_src: String}[]}[] = [
     {
-      title: "test 1",
-      text: "this is one perk level"
+      title: "Parthean Pro",
+      price_monthly: 9.99,
+      price_yearly_month: 5.83,
+      price_yearly: 69.99,
+      perks: [
+        {
+            name: "Unlimited Accounts",
+            description: "Connect all of your accounts (limit on free tier is 3)",
+            photo_src: "test"
+        },
+        {
+            name: "Proactive tips",
+            description: "Get proactive financial insights from Parthean AI",
+            photo_src: "test"
+        },
+        {
+            name: "New AI Tools",
+            description: "You'll get early access to our most powerful AI tools",
+            photo_src: "test"
+        },
+      ]
     },
     {
-      title: "test 2",
-      text: "this is another perk level"
-    },
+        title: "Parthean Pro + Coaching",
+        price_monthly: 79.99,
+        price_yearly_month: 66.67,
+        price_yearly: 879.99,
+        perks: [
+          {
+              name: "Human Coaching",
+              description: "Unlimited calls and chats with your very personal finance coach",
+              photo_src: "test"
+          },
+          {
+              name: "All Pro Features",
+              description: "Unlimited accounts, proactive financial tips from Parthean AI, and our new, most powerful AI tools",
+              photo_src: "test"
+          },
+        ]
+      },
 ];
 
 export const SLIDER_WIDTH = Dimensions.get('window').width + 30;
@@ -34,7 +68,7 @@ export default function CustomCarousel() {
         );
 }
 
-function renderItem({ item, index }: { item: {title: string, text:string}, index: number }){
+function renderItem({ item }: { item: {title: string, price_monthly: Double, price_yearly_month: Double, price_yearly: Double, perks:{name: String, description: String, photo_src: String}[]}}){
     return (
         <View style={{
             backgroundColor:'#1D1D1D',
@@ -49,7 +83,7 @@ function renderItem({ item, index }: { item: {title: string, text:string}, index
     )
 }
 
-function pagination(entries: {title: string, text:string}[], index: number) {
+function pagination(entries: {title: string, price_monthly: Double, price_yearly_month: Double, price_yearly: Double, perks:{name: String, description: String, photo_src: String}[]}[], index: number) {
     return (
         <Pagination
             dotsLength={entries.length}

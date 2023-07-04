@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React, {useState} from 'react';
 import { Dimensions, StyleSheet, Switch, Text, Pressable, SafeAreaView } from 'react-native';
 import CustomCarousel from './assets/components/carousel';
+import CustomSwitch from './assets/components/switch';
 
 export default function App() {
   const [isMonthly, setIsMonthly] = useState(true);
@@ -12,15 +13,10 @@ export default function App() {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="auto" />
+      <Pressable style={styles.x_button}><Text style={styles.p}>X</Text></Pressable>
       <Text style={styles.h1}>Financial coaching and education in your pocket</Text>
       <Text style={styles.p}>Upgrade to get the most out of Parthean</Text>
-      <Switch
-        trackColor={{false: '#767577', true: '#81b0ff'}}
-        thumbColor={isMonthly ? '#f5dd4b' : green}
-        ios_backgroundColor="#3e3e3e"
-        onValueChange={toggleSwitch}
-        value={isMonthly}
-      />
+      <CustomSwitch isMonthly={isMonthly} setIsMonthly={setIsMonthly}/>
       <CustomCarousel/>
       <Pressable style={styles.button}>
         <Text style={styles.p}>Continue</Text>
@@ -64,5 +60,17 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     elevation: 3,
     backgroundColor: '#1FCB64',
+  },
+  x_button: {
+    backgroundColor: '#3E3E3E',
+    width: 30,
+    height: 30,
+    borderRadius: 79,
+    justifyContent: 'center',
+    alignSelf: 'flex-end',
+    marginRight: 30
+  },
+  switch: {
+    
   }
 });
