@@ -13,15 +13,9 @@ export default function App() {
       <Pressable style={styles.x_button} onPress={() => alert('pressed exit btn!')}><Text style={styles.p}>X</Text></Pressable>
 
       <Text style={styles.h1}>Financial coaching and education in your pocket</Text>
-      <Text style={styles.p}>Upgrade to get the most out of Parthean</Text>
-
-      {/* <View style={{flex: 0, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', width: Dimensions.get('window').width}}> */}
+      <Text style={styles.p}>Upgrade to get the most out of Parthean</Text>       
        
-        <CustomSwitch isMonthly={isMonthly} setIsMonthly={setIsMonthly}/>
-        {/* <View style={{position: 'absolute', right: 30, paddingLeft: 10, paddingRight: 10, backgroundColor: '#3D4043', borderRadius: 20}}>
-          <Text style={[styles.p, {fontSize: 10, color: '#1FCB64'}]}>Best Value</Text>
-        </View> */}
-
+      <CustomSwitch isMonthly={isMonthly} setIsMonthly={setIsMonthly}/>
 
       <CustomCarousel isMonthly={isMonthly}/>
       <Pressable style={styles.button} onPress={() => alert('pressed continue btn!')}>

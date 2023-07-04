@@ -76,12 +76,12 @@ export default function CustomCarousel({isMonthly}: {isMonthly: boolean}) {
                 <View style={{
                     backgroundColor:'#1D1D1D',
                     borderRadius: 10,
-                    height: Dimensions.get('window').height,
+                    height: Dimensions.get('window').height * 0.5,
                     padding: 20,
                 }}>
                     <Text style={styles.tier_name}>{item.title}</Text>
                     <Text style={styles.price_monthly}>{isMonthly ? price_monthly : price_annually_monthly} {!isMonthly && annualPrice}</Text>
-                    <View>
+                    <View style={{flexDirection: 'column', flex: 1, justifyContent: 'space-evenly'}}>
                         {perks}
                     </View>
                 </View>
@@ -90,16 +90,18 @@ export default function CustomCarousel({isMonthly}: {isMonthly: boolean}) {
 
         return (
             <SafeAreaView style={{flex: 1}}>
-                <Carousel
-                layout={'default'}
-                data={tiers}
-                vertical={false}
-                sliderWidth={SLIDER_WIDTH}
-                itemWidth={ITEM_WIDTH}
-                renderItem={renderItem}
-                onSnapToItem={(index) => setIndex(index)}
-                />
-                { pagination(tiers, currIndex) }
+                <View style={{maxHeight: Dimensions.get('window').height }}>
+                    <Carousel
+                    layout={'default'}
+                    data={tiers}
+                    vertical={false}
+                    sliderWidth={SLIDER_WIDTH}
+                    itemWidth={ITEM_WIDTH}
+                    renderItem={renderItem}
+                    onSnapToItem={(index) => setIndex(index)}
+                    />
+                    { pagination(tiers, currIndex) }
+                </View>
             </SafeAreaView>
         );
 }
