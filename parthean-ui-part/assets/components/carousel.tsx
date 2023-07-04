@@ -50,7 +50,7 @@ const tiers: tierFeatures[] = [
           {
               name: "Human Coaching",
               description: "Unlimited calls and chats with your very personal finance coach",
-              photo_src: require("../tier_icons/money.png")
+              photo_src: require("../tier_icons/user.png")
           },
           {
               name: "All Pro Features",
@@ -64,8 +64,29 @@ const tiers: tierFeatures[] = [
 export const SLIDER_WIDTH = Dimensions.get('window').width + 30;
 export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.8);
 
-export default function CustomCarousel() {
+export default function CustomCarousel({isMonthly}: {isMonthly: boolean}) {
         let [currIndex, setIndex] = useState(0);
+
+        const renderItem = ({item}: {item: tierFeatures}) => {
+            let perks = item.perks.map((currPerk, i) => renderPerk(currPerk, i));
+            let price = `$${isMonthly ? item.price_monthly : item.price_yearly_month}/month`;
+            let annualPrice = <Text style={styles.price_annually}>{`${!isMonthly ? "(" + item.price_yearly+ "/year)" : ""}`}</Text>;
+            return (
+                <View style={{
+                    backgroundColor:'#1D1D1D',
+                    borderRadius: 5,
+                    height: Dimensions.get('window').height,
+                    padding: 20,
+                }}>
+                    <Text style={styles.tier_name}>{item.title}</Text>
+                    <Text style={styles.price_monthly}>{price} {annualPrice}</Text>
+                    <View>
+                        {perks}
+                    </View>
+                </View>
+            )
+        }
+
         return (
             <SafeAreaView style={{flex: 1}}>
                 <Carousel
@@ -74,28 +95,12 @@ export default function CustomCarousel() {
                 vertical={false}
                 sliderWidth={SLIDER_WIDTH}
                 itemWidth={ITEM_WIDTH}
-                renderItem={renderItem}
+                renderItem={(item) => renderItem(item)}
                 onSnapToItem={(index) => setIndex(index)}
                 />
                 { pagination(tiers, currIndex) }
             </SafeAreaView>
         );
-}
-
-function renderItem({ item }: { item: tierFeatures}){
-    let perks = item.perks.map((currPerk, i) => renderPerk(currPerk, i));
-    return (
-        <View style={{
-            backgroundColor:'#1D1D1D',
-            borderRadius: 5,
-            height: Dimensions.get('window').height,
-            padding: 20,
-     }}>
-          <Text style={{fontSize: 18, color: 'white'}}>{item.title}</Text>
-          <Text style={{fontSize: 16, color: 'white'}}>{item.price_monthly}</Text>
-          {perks}
-        </View>
-    )
 }
 
 function renderPerk(perk: perkFeature, index: number){
@@ -134,7 +139,20 @@ const styles = StyleSheet.create({
     perk_container: {
       marginTop: 10,
       flexDirection: 'row',
-      alignItems: 'center'
+      alignItems: 'center',
+    },
+    tier_name: {
+        color: '#1FCB64',
+        fontSize: 18
+    },
+    price_monthly: {
+        fontSize: 16, 
+        color: '#FFFFFF'
+    },
+    price_annually: {
+        fontSize: 16,
+        color: 'rgba(255, 255, 255, 0.4)',
+        opacity: 0
     },
     perk_name: {
         fontSize: 18,
@@ -150,6 +168,5 @@ const styles = StyleSheet.create({
         width: 30,
         height: 30,
         resizeMode: 'contain'
-    },
-
+    }
   });

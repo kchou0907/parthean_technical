@@ -6,9 +6,6 @@ import CustomSwitch from './assets/components/switch';
 
 export default function App() {
   const [isMonthly, setIsMonthly] = useState(true);
-  const toggleSwitch = () => setIsMonthly(prevState => !prevState);
-  const green: string = '#1FCB64';
-  const font: string = 'Sohne';
 
   return (
     <SafeAreaView style={styles.container}>
@@ -17,9 +14,9 @@ export default function App() {
       <Text style={styles.h1}>Financial coaching and education in your pocket</Text>
       <Text style={styles.p}>Upgrade to get the most out of Parthean</Text>
       <CustomSwitch isMonthly={isMonthly} setIsMonthly={setIsMonthly}/>
-      <CustomCarousel/>
+      <CustomCarousel isMonthly={isMonthly}/>
       <Pressable style={styles.button}>
-        <Text style={styles.p}>Continue</Text>
+        <Text style={[styles.p, {color: 'black'}]}>Continue</Text>
       </Pressable>
 
     </SafeAreaView>
