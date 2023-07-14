@@ -1,8 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState} from 'react';
-import { Dimensions, StyleSheet, Text, Pressable, SafeAreaView, View } from 'react-native';
-import CustomCarousel from './assets/components/carousel';
-import CustomSwitch from './assets/components/switch';
+import { Dimensions, StyleSheet, Text, Pressable, SafeAreaView } from 'react-native';
+import CustomCarousel from './assets/components/carousel/carousel';
+import CustomSwitch from './assets/components/toggle_switch/switch';
+import { GREEN } from './shared/constants';
 
 export default function App() {
   const [isMonthly, setIsMonthly] = useState(true);
@@ -26,11 +27,14 @@ export default function App() {
   );
 }
 
+const main_container_padding = Dimensions.get('window').height * 0.05;
+const text_max_width = Dimensions.get('window').width * 0.8;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: Dimensions.get('window').height * 0.05,
-    paddingBottom: Dimensions.get('window').height * 0.05,
+    paddingTop: main_container_padding,
+    paddingBottom: main_container_padding,
     backgroundColor: '#000000',
     alignItems: 'center',
     justifyContent: 'center',
@@ -38,7 +42,7 @@ const styles = StyleSheet.create({
   h1: {
     textAlign: 'center',
     color:'#FFFFFF',
-    maxWidth: Dimensions.get('window').width * 0.8,
+    maxWidth: text_max_width,
 
     fontSize: 24,
     lineHeight: 30,  
@@ -46,7 +50,7 @@ const styles = StyleSheet.create({
   p: {
     textAlign: 'center',
     color: '#FFFFFF',
-    maxWidth: Dimensions.get('window').width * 0.8,
+    maxWidth: text_max_width,
 
     opacity: 0.75,
     fontSize: 16,
@@ -59,7 +63,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: Dimensions.get('window').width * 0.35,
     borderRadius: 4,
     elevation: 3,
-    backgroundColor: '#1FCB64',
+    backgroundColor: GREEN,
   },
   x_button: {
     backgroundColor: '#3E3E3E',
@@ -69,8 +73,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignSelf: 'flex-end',
     marginRight: 30
-  },
-  switch: {
-    
   }
 });

@@ -1,5 +1,6 @@
 import React from "react";
-import { View, Pressable, StyleSheet, Text, Dimensions, StyleProp } from "react-native";
+import { View, Pressable, Text, Dimensions, StyleProp } from "react-native";
+import styles from "./style";
 
 export default function CustomSwitch({style, isMonthly, setIsMonthly}:{style?: StyleProp<any> | undefined; isMonthly: boolean; setIsMonthly: Function}) {
 
@@ -29,47 +30,9 @@ export default function CustomSwitch({style, isMonthly, setIsMonthly}:{style?: S
  */
 function ValueMarker() {
     return(
-        <View style={{position: 'absolute', right: 30, paddingLeft: 10, paddingRight: 10, backgroundColor: '#3D4043', borderRadius: 20}}>
-                <Text style={[styles.p, {fontSize: 10, color: '#1FCB64'}]}>Best Value</Text>
+        <View style={styles.value_wrapper}>
+                <Text style={[styles.p, styles.value_text]}>Best Value</Text>
             </View>
     );
 }
 
-const styles = StyleSheet.create({
-    switch_wrapper: {
-        flexDirection: "row", 
-        width: Dimensions.get('window').width * 0.4,
-        maxWidth: Dimensions.get('window').width * 0.4,
-        borderRadius: 60,
-        backgroundColor: '#1D1D1D',
-        marginTop: 20,
-        marginBottom: 20,
-    },
-    btn: {
-      flex: 1,
-      alignItems: "center",
-      justifyContent: "center",
-      padding: 10,
-      borderRadius: 60
-    },
-    btn_active: {
-        backgroundColor: '#1FCB64',
-    },
-    btn_not_active: {
-        backgroundColor: '#1D1D1D',
-    },
-    p: {
-        textAlign: 'center',
-        color: '#FFFFFF',
-
-        fontSize: 12,
-        lineHeight: 15,
-      },
-    p_active: {
-        textAlign: 'center',
-        color: 'black',
-
-        fontSize: 12,
-        lineHeight: 15,
-    }
-  });
