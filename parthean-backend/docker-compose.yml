@@ -1,0 +1,27 @@
+version: '3.3'
+
+services:
+
+  mongodb:
+    build: ./db
+    expose:
+      - 27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=test
+    container_name: parthean_db
+    image: parthean/mongodb
+    networks:
+      - parthean_network
+  
+  node_backend:
+    build: .
+    ports:
+        - '8080:8080'
+    container_name: parthean_backend
+    image: parthean/node_backend
+    networks:
+      - parthean_network
+
+networks:
+  parthean_network:
