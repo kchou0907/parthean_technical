@@ -1,7 +1,7 @@
 # parthean_technical
 
 To run ui:
-- Install [Expo Go](https://docs.expo.dev/get-started/expo-go/)
+- Install [Expo's Requirements](https://docs.expo.dev/get-started/installation/) and [Expo Go](https://docs.expo.dev/get-started/expo-go/)
 - Clone and navigate to "parthean-ui-part" folder and run `run.sh` (or `npx expo start`)
 - Open Expo Go and follow instructions to connect
 
